@@ -1,14 +1,20 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from cinema.views import GenreViewSet, ActorViewSet, CinemaHallViewSet, MovieViewSet, MovieSessionViewSet
+from rest_framework import routers
+from cinema.views import (MovieSet,
+                          ActorSet,
+                          GenreSet,
+                          CinemaHallSet,
+                          MovieSessionSet)
 
-router = DefaultRouter()
-router.register(r'genres', GenreViewSet)
-router.register(r'actors', ActorViewSet)
-router.register(r'cinema_halls', CinemaHallViewSet)
-router.register(r'movies', MovieViewSet)
-router.register(r'movie_sessions', MovieSessionViewSet)
+router = routers.DefaultRouter()
+router.register("movies", MovieSet)
+router.register("actors", ActorSet)
+router.register("genres", GenreSet)
+router.register("cinema_halls", CinemaHallSet)
+router.register("movie_sessions", MovieSessionSet)
 
 urlpatterns = [
-    path('api/cinema/', include(router.urls)),
+    path("", include(router.urls))
 ]
+
+app_name = "cinema"
